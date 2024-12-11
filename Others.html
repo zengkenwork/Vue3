@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radiobutton list</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <div v-for="option in options">
+        <input
+          type="radio"
+          name="xxx"
+          :value="option.id"
+          v-model="selectedOption"
+        />
+        {{option.name}}
+      </div>
+      <input
+        type="text"
+        placeholder="請輸入其他原因"
+        v-show="selectedOption == 3"
+        v-model="other"
+      />
+    </div>
+    <script src="/js/vue.global.js"></script>
+    <script>
+      let { createApp, ref, watch } = Vue;
+      const options = ref([
+        { id: 1, name: "朋友介紹" },
+        { id: 2, name: "網路資訊" },
+        { id: 3, name: "其他" },
+      ]);
+
+      // radiobutton change 時, 判斷選擇的選項, 若不是3, 就清空textbox
+      const selectedOption = ref("");
+      const other = ref("");
+
+      watch(selectedOption, (newValue) => {
+        if (newValue == 3) {
+          other.value = "";
+        }
+      });
+
+      const config = {
+        setup() {
+          return {
+            selectedOption,
+            other,
+            options,
+          };
+        },
+      };
+
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
