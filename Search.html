@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="searchTerm" />
+      <ul>
+        <li v-for="product in selectBook">{{product}}</li>
+      </ul>
+    </div>
+
+    <script src="/js/vue.global.js"></script>
+    <script>
+      let { createApp, ref, computed } = Vue;
+
+      let productArr = ["bookA", "bookAB", "bookABC", "bookABCD"];
+      let products = ref(productArr);
+      const searchTerm = ref("");
+
+      const selectBook = computed(() => {
+        if (searchTerm.value.length > 0) {
+          return products.value.filter((item) =>
+            item.toLowerCase().includes(searchTerm.value.toLowerCase())
+          );
+        } else {
+          return products.value;
+        }
+      });
+
+      let config = {
+        setup() {
+          return {
+            products,
+            searchTerm,
+            selectBook,
+          };
+        },
+      };
+
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
