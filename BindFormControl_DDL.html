@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .hobby {
+        display: flex;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>v-model是雙向繫結, 例如:若修改了下拉選單的值, cityId會自動更新</p>
+
+    <div id="app">
+      <div>
+        <label for="cityId">城市</label>
+        <select id="cityId" v-model="cityId">
+          <option value="">請選擇</option>
+          <option v-for="city in cities" :value="city.id">{{city.name}}</option>
+        </select>
+      </div>
+
+      <div style="display: flex">
+        <label for="hobby">興趣</label>
+        <div class="hobby">
+          <span v-for="hobby in hobbies">
+            <input
+              type="checkbox"
+              v-model="hobbyValues"
+              :value="hobby.id"
+            />{{hobby.name}}
+          </span>
+        </div>
+      </div>
+
+      <div style="display: flex">
+        <label for="maritalStatus">婚姻狀況</label>
+        <div class="hobby">
+          <span v-for="item in maritalStatus">
+            <input
+              type="radio"
+              name="maritalStatus"
+              v-model="maritalStatusId"
+              :value="item.id"
+            />{{item.name}}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+      const cities = ref([
+        { id: 1, name: "台北" },
+        { id: 2, name: "台中" },
+        { id: 3, name: "台南" },
+      ]);
+
+      const hobbies = ref([
+        { id: 1, name: "游泳" },
+        { id: 2, name: "登山" },
+        { id: 3, name: "打球" },
+      ]);
+
+      // 婚姻狀況
+      const maritalStatus = ref([
+        { id: 1, name: "未婚" },
+        { id: 2, name: "已婚" },
+        { id: 3, name: "離婚" },
+        { id: 4, name: "喪偶" },
+      ]);
+
+      const config = {
+        setup() {
+          return {
+            cityId: ref(""),
+            cities,
+            hobbyValues: ref([]),
+            hobbies,
+            maritalStatusId: ref(""),
+            maritalStatus,
+          };
+        },
+      };
+
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
