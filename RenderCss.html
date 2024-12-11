@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>渲染CSS Class</title>
+    <style>
+      .hot {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>紅色是暢銷書</h2>
+    <div id="app">
+      <div v-for="product in products">
+        <div :class="{hot: product.isHot}">
+          {{product.name}} - {{product.price}}
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+      let { createApp, ref } = Vue;
+      const bookArr = [
+        {
+          name: "JavaScript 高級程序設計",
+          price: 580,
+          isHot: true,
+        },
+        {
+          name: "JavaScript 忍者秘籍",
+          price: 500,
+          isHot: false,
+        },
+        {
+          name: "JavaScript 設計模式",
+          price: 450,
+          isHot: true,
+        },
+      ];
+
+      let products = ref(bookArr);
+      let config = {
+        setup() {
+          return {
+            products,
+          };
+        },
+      };
+
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
