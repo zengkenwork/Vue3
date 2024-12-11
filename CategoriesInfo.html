@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>計算屬性</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>書本總數量: {{bookCount}}</h3>
+      <h3>書本總金額: {{totalPrice}}</h3>
+      <hr />
+      <h2>書本清單</h2>
+      <ul>
+        <li v-for="book in books" :key="book.name">
+          {{book.name}} - {{book.price}}
+        </li>
+      </ul>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+      let { createApp, computed, ref } = Vue;
+      const bookArr = [
+        {
+          name: "JavaScript 高級程序設計",
+          price: 580,
+        },
+        {
+          name: "JavaScript 忍者秘籍",
+          price: 500,
+        },
+        {
+          name: "JavaScript 設計模式",
+          price: 450,
+        },
+      ];
+
+      const books = ref(bookArr);
+
+      // 計算屬性,回傳總數量
+      const bookCount = computed(() => {
+        return books.value.length;
+      });
+
+      // 計算屬性, 回傳總價格
+      const totalPrice = computed(() => {
+        return books.value.reduce((acc, next) => acc + next.price, 0);
+      });
+
+      const config = {
+        setup() {
+          return {
+            books,
+            bookCount, // 若屬性與變數名稱相同, 可以省略 : bookCount: bookCount
+            totalPrice,
+          };
+        },
+      };
+
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
