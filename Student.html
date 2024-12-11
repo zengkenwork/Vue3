@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>條件渲染</title>
+    <style>
+      small {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>若不及格就加星號</h2>
+    <h2>根據性別顯示稱謂</h2>
+    <div id="app">
+      <table border="1">
+        <thead>
+          <th>id</th>
+          <th>name</th>
+          <th>chinese</th>
+          <th>english</th>
+        </thead>
+        <tbody>
+          <tr v-for="student in students">
+            <td>{{ student.id }}</td>
+            <td>
+              {{ student.name }}
+              <span v-if="student.gender === true">先生</span>
+              <span v-else-if="student.gender === false">小姐</span>
+              <span v-else>?</span>
+            </td>
+            <td>
+              {{ student.chinese }}
+              <small v-if="student.chinese < 60">*</small>
+            </td>
+            <td>
+              {{ student.english }}
+              <small v-if="student.english < 60">*</small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="/js/vue.global.js"></script>
+    <script>
+      let { createApp, ref } = Vue;
+      const studentArr = [
+        { id: 1, name: "Allen", gender: true, chinese: 50, english: 80 },
+        { id: 2, name: "Bob", gender: true, chinese: 85, english: 70 },
+        { id: 3, name: "Cindy", gender: false, chinese: 70, english: 90 },
+        { id: 4, name: "David", chinese: 60, english: 50 },
+        { id: 5, name: "Eva", gender: false, chinese: 50, english: 60 },
+      ];
+
+      const students = ref(studentArr);
+
+      let config = {
+        setup() {
+          return {
+            students,
+          };
+        },
+      };
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
