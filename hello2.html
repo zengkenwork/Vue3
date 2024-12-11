@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h2>店名: {{store.name}}</h2>
+      <h2>地址: {{store.address}}</h2>
+      <h2>營業時間: {{store.open}}</h2>
+    </div>
+
+    <script src="js/vue.global.js"></script>
+    <script type="module">
+      // 利用 解構賦值（Destructuring Assignment）語法，從 Vue 這個物件中取出
+      // createApp 和 ref 這兩個函數並將它們賦值給變數 createApp 和 ref
+      const { createApp, ref } = Vue;
+
+      const config = {
+        setup() {
+          return {
+            store: {
+              name: "台北店",
+              address: "台北市信義區",
+              open: "星期一至五, 09:00~21:00",
+            },
+          };
+        },
+      };
+
+      // 建立 Vue 應用程式, 並指定容器是 id 為 app 的元素
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
