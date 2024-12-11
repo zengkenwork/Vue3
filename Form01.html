@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <form action="">
+        <div>
+          <label for="name">姓名</label>
+          <input v-model="form.name" />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input v-model="form.email" />
+        </div>
+        <div>
+          <label for="password">密碼</label>
+          <input type="password" v-model="form.password" />
+        </div>
+        <div>
+          <label for="intro">自我介紹</label>
+          <textarea v-model="form.intro"></textarea>
+        </div>
+      </form>
+    </div>
+
+    <script src="/js/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+      const register = {
+        name: "Allen Kuo",
+        email: "allen@gmail.com",
+        password: "123456",
+        intro: `第一行
+第二行`,
+      };
+
+      let form = ref(register);
+
+      const config = {
+        setup() {
+          return {
+            form,
+          };
+        },
+      };
+
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
