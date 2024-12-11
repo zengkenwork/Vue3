@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>商店資訊</title>
+    <style>
+      .container {
+        border: 1px solid #000;
+        margin: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container" v-for="store in stores">
+        <h1>店名: {{store.name}}</h1>
+        <h3>地址: {{store.address}}</h3>
+        <h3>營業時間: {{store.open}}</h3>
+      </div>
+    </div>
+    <script src="/js/vue.global.js"></script>
+    <script type="module">
+      const { createApp } = Vue;
+      const storeArr = [
+        {
+          name: "台北店",
+          address: "台北市信義區",
+          open: "星期一至五, 09:00 ~ 21:00",
+        },
+        {
+          name: "台中店",
+          address: "台中市西屯區",
+          open: "星期一至五, 09:00 ~ 21:00",
+        },
+        {
+          name: "高雄店",
+          address: "高雄市前鎮區",
+          open: "星期一至五, 09:00 ~ 21:00",
+        },
+      ];
+      let config = {
+        setup() {
+          return {
+            stores: storeArr,
+          };
+        },
+      };
+      createApp(config).mount("#app");
+    </script>
+  </body>
+</html>
