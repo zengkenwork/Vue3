@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>設計Component(組件)</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <my-component></my-component>
+      <hr />
+      <my-component></my-component>
+      <hr />
+      <my-component></my-component>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const config = {
+        setup() {
+          return {};
+        },
+      };
+
+      const myComponent = {
+        template: `<div>Hello from My Component`,
+      };
+
+      const app = createApp(config);
+
+      app.component("my-component", myComponent);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
