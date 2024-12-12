@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header-component></header-component>
+    </div>
+    我是 contact 頁
+    <script src="/js/vue.global.js"></script>
+    <script src="/Component01/header.js"></script>
+    <script>
+      const { createApp } = Vue;
+
+      const config = {
+        setup() {
+          return {};
+        },
+      };
+
+      const app = createApp(config);
+      app.component("header-component", HeaderComponent);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
