@@ -1,0 +1,25 @@
+#brand {
+  background-color: black;
+  color: white;
+  height: 60px;
+  position: relative;
+  line-height: 60px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+ul {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+}
+li {
+  display: inline-block;
+  margin-left: 20px;
+}
+a {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.active {
+  color: red;
+}

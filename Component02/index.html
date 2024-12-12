@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header-component
+        :active-key="'home'"
+        :nav-items="navItems"
+      ></header-component>
+    </div>
+    我是 index 頁
+    <script src="/js/vue.global.js"></script>
+    <script src="/Component02/header.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const config = {
+        setup() {
+          const navItems = ref([
+            { key: "home", name: "Home", url: "index.html" },
+            { key: "about", name: "About", url: "about.html" },
+            { key: "contact", name: "Contact", url: "contact.html" },
+          ]);
+          return { navItems };
+        },
+      };
+
+      const app = createApp(config);
+      app.component("header-component", HeaderComponent);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
